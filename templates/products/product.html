@@ -1,0 +1,48 @@
+{% extends 'global/main.html' %}
+{% load static %}
+{% block content %}
+<div class="product-container">
+    <div class="product-image-container">
+        <div class="product-image">
+            <img src="{{product.product_image.url}}" alt="{{product.product_name}}">
+            {% if request.user.profile.user_role == 'Alyjy' %}
+            <button id="favorite-btn" data-id="{{ product.id }}" class="heart-button">
+                <span id="heart-icon" class="{% if status %}filled{% endif %}">
+                    &#9825;
+                </span>
+            </button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="product-details">
+        <h1>{{product.product_name}}</h1>
+        <p><span>Bahasy:</span> <span style="color:#6236f4">{{product.price}} TMT</span></p>
+        <p><span>Beyany:</span> {{product.description}}</p>
+        <p><span>Haryt sany:</span> {{product.stock_quantity}}</p>
+        <p><span>Kategoriyasy:</span> {{product.category}}</p>
+
+        {% if request.user.profile.user_role == 'Alyjy' %}
+        <div class="cart-controls">
+            <span>Sany: </span><span id="cart-quantity">0</span>
+            <button id="subtract-btn" data-id="{{ product.id }}" class="remove-from-cart-btn">-</button>
+
+            <button id="add-btn" class="add-to-cart-btn" data-id="{{ product.id }}">
+                +
+            </button>
+        </div>
+        {% endif %}
+
+        <hr>
+        <a href="{% url 'profile' product.seller.id %}" class="card-link">
+            <p class="card-text card-link1">
+                <strong>Satyjy:</strong> {{product.seller.firstname}} {{product.seller.lastname}}<br>
+            </p>
+        </a>
+    </div>
+</div>
+{% endblock content %}
+
+{% block for_script %}
+<script src="{% static 'js/favorites.js' %}"></script>
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}

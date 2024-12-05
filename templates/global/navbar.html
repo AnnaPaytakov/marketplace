@@ -1,0 +1,49 @@
+{% load static %} <!-- Загружаем шаблонный тег static для использования статических файлов -->
+
+<div class="navbar"> <!-- Контейнер для навигационной панели -->
+    <div class="menu-toggle" id="menu-toggle"> <!-- Кнопка для переключения видимости сайдбара -->
+        <span class="bar"></span> <!-- Первая полоска для кнопки меню (гамбургер) -->
+        <span class="bar"></span> <!-- Вторая полоска для кнопки меню (гамбургер) -->
+        <span class="bar"></span> <!-- Третья полоска для кнопки меню (гамбургер) -->
+    </div>
+    <div class="logo-container"> <!-- Контейнер для логотипа -->
+        <a href="{% url 'products' %}" class="logo-link"> <!-- Ссылка на страницу продуктов -->
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo"> <!-- Логотип сайта -->
+            <p class="logo-txt">TM-Marketplace</p> <!-- Текст логотипа -->
+        </a>
+    </div>
+    <div class="user-icon-container"> <!-- Контейнер для иконки пользователя -->
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'account' %}" class="user-icon-link"> <!-- Ссылка на страницу входа -->
+            <img src="{{request.user.profile.profile_image.url}}" alt="User Icon" class="user-icon">
+            <!-- Иконка пользователя -->
+        </a>
+        
+        {% else %}
+        <a href="{% url 'account' %}" class="user-icon-link"> <!-- Ссылка на страницу входа -->
+            <img src="{% static 'images/user-icon.png' %}" alt="User Icon" class="user-icon">
+            <!-- Иконка пользователя -->
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="sidebar" id="sidebar"> <!-- Боковая панель с id 'sidebar' -->
+    <div class="sidebar-close" id="sidebar-close">&times;</div> <!-- Кнопка для закрытия боковой панели -->
+   
+
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'account' %}" class="sidebar-link">Shahsy otag</a> <!-- Ссылка на профиль -->
+    {% if request.user.profile.user_role == 'Alyjy' %}
+    <a href="{% url 'user-favorites' %}" class="sidebar-link">Halanlarym</a>
+    <a href="{% url 'cart-items' %}" class="sidebar-link">Korzina</a>
+    {% endif %}
+    <br>
+    <a href="{% url 'logout' %}" class="sidebar-link">Ulgamdan chykmak</a>
+    {% else %}
+    <a href="{% url 'login' %}" class="sidebar-link">Shahsy otag</a> <!-- Ссылка на профиль -->
+    {% endif %}
+
+
+    <!-- В будущем будем добавлять сюда больше ссылок -->
+</div>

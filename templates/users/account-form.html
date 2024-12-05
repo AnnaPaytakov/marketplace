@@ -1,0 +1,33 @@
+{% extends 'global/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-container">
+    <form action="" method="POST" class="custom-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Account Form</h1>
+        <div class="error-message" id="error-message">Dogry telefon nomer girizmeňizi haýyş edýäris</div>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="error-msg">{{ message }} </p>
+            {% endfor %}
+        {% endif %}
+        
+        {% for field in form %}
+            <div class="form-group">
+                {{ field }}
+                
+                {% for error in field.errors %}
+                    <p style="color:red">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        
+        <input type="submit" value="Tassykla">
+    </form>
+</div>
+{% endblock content %}
+
+{% block for_script %}
+<script src="{% static 'js/check-phone3.js' %}"></script>
+{% endblock for_script %}

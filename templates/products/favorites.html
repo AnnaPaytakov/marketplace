@@ -1,0 +1,30 @@
+{% extends 'global/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="profile-container">
+        <div class="profile-card">
+            <h3>Halanlarym</h3>
+            <div class="product-grid">
+                {% for favorite in favorites %}
+                <div class="card">
+                    <a href="{% url 'product' favorite.product.id %}" class="card-link">
+                        <div class="img-div">
+                            <img src="{{favorite.product.product_image.url}}" alt="{{favorite.product.product_name}}" class="card-img">
+                        </div>
+                    </a>
+                    <div class="card-body">
+                        <a href="{% url 'product' favorite.product.id %}" class="card-link">
+                            <h5 class="card-title">
+                                <p class="card-link">{{favorite.product.product_name}}</p>
+                            </h5>
+                            <p class="card-text">
+                                <strong>Bahasy:</strong> <span style="color:#6236f4">{{favorite.product.price}} TMT</span>
+                            </p>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

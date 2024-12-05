@@ -1,0 +1,37 @@
+{% load static %} <!-- Загружаем шаблонный тег static для использования статических файлов -->
+
+<footer class="footer"> <!-- Контейнер для подвала страницы -->
+    <div class="footer-content"> <!-- Основное содержимое подвала -->
+        <div class="footer-logo"> <!-- Контейнер для логотипа в подвале -->
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo"> <!-- Логотип сайта -->
+            <p class="footer-txt">TM Marketplace</p> <!-- Текст логотипа -->
+        </div>
+        <div class="footer-links"> <!-- Контейнер для ссылок в подвале -->
+            <a href="#" class="footer-link">Esasy sahypa</a> <!-- Ссылка на основную страницу -->
+            <a href="{% url 'biz-barada' %}" class="footer-link">Biz barada</a> <!-- Ссылка на страницу о компании -->
+            <a href="{% url 'kontaktlarymyz' %}" class="footer-link">Kontaktlar</a> <!-- Ссылка на страницу контактов -->
+            <a href="#" class="footer-link">Maglumat goragy</a> <!-- Ссылка на страницу информации -->
+        </div>
+      {% if contacts %}
+        <div class="footer-contact"> <!-- Контейнер для контактной информации -->
+            <p>Adres: {{contacts.address}}</p> <!-- Адрес компании -->
+            <p>Telefon: {{contacts.phone1}}</p> <!-- Телефонный номер компании -->
+            <p>Telefon: {{contacts.phone2}}</p> <!-- Телефонный номер компании -->
+            <p>Email: {{contacts.email}}</p> <!-- Электронная почта компании -->
+        </div>
+        <div class="footer-social"> <!-- Контейнер для ссылок на социальные сети -->
+            <p>Biz social media-da:</p> <!-- Заголовок для раздела социальных сетей -->
+            <a href="{{contacts.facebook}}" class="social-link">Facebook</a> <!-- Ссылка на страницу Facebook -->
+            <a href="{{contacts.linkedin}}" class="social-link">Linkedin</a> <!-- Ссылка на страницу LinkedIn -->
+            <a href="{{contacts.instagram}}" class="social-link">Instagram</a> <!-- Ссылка на страницу Instagram -->
+        </div>
+      {% else %}
+        Kontaktlar gorkezilmedik
+      {% endif %}
+    </div>
+    <div class="footer-bottom"> <!-- Нижняя часть подвала -->
+        <p>&copy; 2024 TM Marketplace. Hemme hukuklar goragly.</p> <!-- Авторские права и текст для подвала -->
+    </div>
+</footer>
+
+

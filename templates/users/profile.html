@@ -1,0 +1,51 @@
+{% extends 'global/main.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="profile-container">
+        <div class="profile">
+            <div class="profile-header">
+                <img src="{{profile.profile_image.url}}" alt="Profile Photo">
+        
+                <div class="profile-info">
+                    <h2>{{profile.firstname}} {{profile.lastname}}</h2>
+                    <p>{{profile.user_role}}</p>
+                </div>
+            </div>
+            <div class="profile-details">
+                <p><span class="prf-icon">&#128222;</span>Telefon: {{profile.phone}}</p>
+                <p><span class="prf-icon">&#128231;</span>Email: {{profile.email}}</p>
+                <p><span class="prf-icon">&#127757;</span>Yeri: {{profile.address}}</p>
+                <p><span class="prf-icon">&#128337;</span>Ish wagty: {{profile.start_time|date:'H:i'}} - {{profile.finish_time|date:'H:i'}}</p>
+                <p><span class="prf-icon">&#128221;</span>Biz barada: {{profile.bio}}</p>
+            </div>
+        </div>
+        <div class="profile-card">
+            <h3>Harytlar</h3>
+            <div class="product-grid">
+                {% for product in all_products %}
+                <div class="card">
+                    <a href="{% url 'product' product.id %}" class="card-link">
+                        <div class="img-div">
+                            <img src="{{product.product_image.url}}" alt="{{product.product_name}}" class="card-img">
+                        </div>
+                    </a>
+                    <div class="card-body">
+                        <a href="{% url 'product' product.id %}" class="card-link">
+                            <h5 class="card-title">
+                                <p class="card-link">{{product.product_name}}</p>
+                            </h5>
+                            <p class="card-text">
+                                <strong>Bahasy:</strong> <span style="color:#6236f4">{{product.price}} TMT</span><br>
+                                <strong>Beyany:</strong> {{product.description|truncatewords:5}}<br>
+                                <strong>Haryt sany:</strong> {{product.stock_quantity}}<br>
+                                <strong>Kategoriya:</strong> {{product.category}}   
+                            </p>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

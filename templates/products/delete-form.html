@@ -1,0 +1,13 @@
+{% extends 'global/main.html' %}
+
+{% block content %}
+    <div class="rm-form-container">
+        <form action="" method="POST" class="custom-form">
+            {% csrf_token %}
+            <p>Siz <span class="prd-txt">{{product}}</span> haryty pozmak isleyanizmi?</p>
+            <a href="{% url 'products' %}" class="btn-no">Yok</a>
+            <input type="submit" value="Hawo">
+        </form>
+    </div>
+{% endblock content %}
+

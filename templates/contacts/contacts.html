@@ -1,0 +1,15 @@
+{% extends 'global/main.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 style="text-align: center; margin:20px; color:#6236f4">TM-Marketplace Kontaktlar</h1>
+    
+    <div class="profile-details">
+        <p><span class="prf-icon">&#128222;</span>Telefon: {{our_contacts.phone1}}</p>
+        <p><span class="prf-icon">&#128222;</span>Telefon: {{our_contacts.phone2}}</p>
+        <p><span class="prf-icon">&#128231;</span>Email: {{our_contacts.email}}</p>
+        <p><span class="prf-icon">&#127757;</span>Yeri: {{our_contacts.address}}</p>
+    </div>
+</div>
+
+{% endblock %}

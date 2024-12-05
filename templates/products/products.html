@@ -1,0 +1,54 @@
+{% extends 'global/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <form id="search-form" method="GET" class="search-form">
+        <div class="form-group">
+            <select name="q_category" class="search-select">
+                <option value="">Kategoriya</option>
+                {% for category in categories %}
+                    <option value="{{ category.name }}" {% if request.GET.q_category == category.name %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" name="q_name" placeholder="Haryt ady" value="{{ request.GET.q_name }}" class="search-input">
+        </div>
+        <button type="submit" class="search-button">Gozle</button>
+        <a href="#" class="cancel-button">Arassala</a>
+    </form>
+
+    <div id="product-grid" class="product-grid">
+        {% for product in all_products %}
+        <div class="card">
+            <a href="{% url 'product' product.id %}" class="card-link">
+                <div class="img-div">
+                    <img src="{{product.product_image.url}}" alt="{{product.product_name}}" class="card-img">
+                </div>
+            </a>
+            <div class="card-body">
+                <a href="{% url 'product' product.id %}" class="card-link">
+                    <h5 class="card-title">
+                        <p class="card-link">{{product.product_name}}</p>
+                    </h5>
+                    <p class="card-text">
+                        <strong>Bahasy:</strong> <span style="color:#6236f4">{{product.price}} TMT</span><br>
+                        <strong>Beyany:</strong> {{product.description|truncatewords:5}}<br> 
+                    </p>
+                </a>
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block for_script %}
+<script src="{% static 'js/fetch-products.js' %}"></script>
+{% endblock %}

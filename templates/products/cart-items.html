@@ -1,0 +1,49 @@
+{% extends 'global/main.html' %}
+{% load static %}
+{% block content %}
+<div class="cart-container">
+    <h1>Siziň Harytlaryňyz</h1>
+
+    {% if cart_items %}
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Haryt Ady</th>
+                    <th>Mukdar</th>
+                    <th>Bahasy</th>
+                    <th>Jemi Bahasy</th>
+                    <th>Hereketler</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.product_name }}</td>
+                    <td>
+                        <button class="subtract-btn" data-id="{{ item.product.id }}">-</button>
+                        <span class="quantity">{{ item.quantity }}</span>
+                        <button class="add-btn" data-id="{{ item.product.id }}">+</button>
+                    </td>
+                    <td>{{ item.product.price }}</td>
+                    <td>{{ item.get_total_price }}</td>
+                    <td>
+                        <button class="remove-btn" data-id="{{ item.product.id }}">Pozmak</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="cart-summary">
+            <p>Jemi Bahasy: {{ cart.get_total_price }}</p>
+            <button id="buy-btn">Satyn almak</button>
+        </div>
+    {% else %}
+        <p>Siziň sebediňiz boş.</p>
+    {% endif %}
+</div>
+{% endblock content %}
+
+{% block for_script %}
+<script src="{% static 'js/cart-items.js' %}"></script>
+{% endblock %}

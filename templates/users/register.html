@@ -1,0 +1,33 @@
+{% extends 'global/main.html' %}
+{% load static %}
+{% block content %}
+<div class="register-wrap">
+    <div class="register-form">
+        <form action="" method="POST" class="custom-form">
+            {% csrf_token %}
+
+            <!-- "X" кнопка когда пользователь нажмет на нее перейдет на логин страницу -->
+            <a href="{% url 'login' %}" class="close-button">X</a>
+
+            <h2>Registrasiýa</h2>
+
+            {% for field in form %}
+                {{field}}
+
+                {% for error in field.errors %}
+                    <p style="color:red">{{error}}</p>
+                {% endfor %}
+
+            {% endfor %}
+            <div class="show-pswd"><input type="checkbox" id="togglePassword"> Paroly görkez</div>
+            <div class="error-message" id="error-message">Dogry telefon nomer girizmeňizi haýyş edýäris</div>
+            <input type="submit" value="Registrasiýa">
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block for_script %}
+<script src="{% static 'js/check-phone1.js' %}"></script>
+<script src="{% static 'js/show-password1.js' %}"></script>
+{% endblock for_script %}
